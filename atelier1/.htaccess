@@ -1,4 +1,4 @@
 AuthName "Accès protégé"
 AuthType Basic
-AuthUserFile /home/alexis.veloso25/www/.htpasswd
+AuthUserFile /home/veloso/www/.htpasswd
 Require valid-user
