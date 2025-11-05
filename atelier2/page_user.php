@@ -16,7 +16,7 @@ if (!isset($_COOKIE['authToken'])
     <title>Espace Utilisateur</title>
 </head>
 <body>
-    <h1>Bienvenue sur votre espace utilisateur 👋</h1>
+    <h1>Bienvenue sur votre espace VELOSO Alexis 👋</h1>
     <p>Vous êtes connecté en tant que <strong>user</strong>.</p>
     <a href="logout.php">Se déconnecter</a>
 </body>
