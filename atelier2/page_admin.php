@@ -4,7 +4,8 @@ session_start();
 
 // Vérifier si l'utilisateur est bien en possession d'un cookie valide
 // Dans le cas contraire il sera redirigé vers la page d'accueil de connexion
-if (!isset($_COOKIE['authToken']) || $_COOKIE['authToken'] !== '1234' ) {
+if (!isset($_COOKIE['authToken']) || $_COOKIE['authToken'] !== ($_SESSION['authToken'] ?? null)) {
+    // Si le cookie est invalide ou a expiré, on renvoie vers la page de connexion
     header('Location: index.php');
     exit();
 }
