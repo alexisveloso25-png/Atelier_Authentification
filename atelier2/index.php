@@ -4,7 +4,7 @@ session_start();
 // Si un cookie et une session valides existent déjà, rediriger vers la bonne page
 if (isset($_COOKIE['authToken']) && isset($_SESSION['authToken']) && $_COOKIE['authToken'] === $_SESSION['authToken']) {
     // Redirige selon le rôle enregistré
-    if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+    if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {        // redirection admin 
         header('Location: page_admin.php');
         exit();
     } elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'user') {   // New utilisateur
