@@ -2,13 +2,6 @@
 session_start();
 
 
-// Compteur de visites
-if (isset($_SESSION['visites'])) {
-    $_SESSION['visites'] += 1; // Incrémente si déjà défini
-} else {
-    $_SESSION['visites'] = 1;  // Initialise à 1 si première visite
-}
-
 // Si un cookie et une session valides existent déjà, rediriger vers la bonne page
 if (isset($_COOKIE['authToken']) && isset($_SESSION['authToken']) && $_COOKIE['authToken'] === $_SESSION['authToken']) {
     // Redirige selon le rôle enregistré
