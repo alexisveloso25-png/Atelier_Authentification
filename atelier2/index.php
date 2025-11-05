@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: page_admin.php');
         exit();
 
-    } elseif ($username === 'user' && $password === 'utilisateur') {
+    } elseif ($username === 'user' && $password === 'utilisateur') {    // New identifiant
         $token = bin2hex(random_bytes(16));
         $_SESSION['authToken'] = $token;
         $_SESSION['role'] = 'user';
