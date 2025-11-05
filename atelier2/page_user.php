@@ -18,8 +18,6 @@ if (!isset($_COOKIE['authToken'])
 <body>
     <h1>Bienvenue sur votre espace utilisateur 👋</h1>
     <p>Vous êtes connecté en tant que <strong>user</strong>.</p>
-    <p>Votre jeton d'authentification :</p>
-    <pre><?= htmlspecialchars($_COOKIE['authToken']) ?></pre>
     <a href="logout.php">Se déconnecter</a>
 </body>
 </html>
