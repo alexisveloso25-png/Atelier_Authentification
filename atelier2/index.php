@@ -18,9 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Vérification simple du username et de son password.
     // Si ok alors on initialise le cookie sur le poste de l'utilisateur 
     if ($username === 'admin' && $password === 'secret') {
-    $token = bin2hex(random_bytes(16));         // 🔹 Jeton unique
-    $_SESSION['authToken'] = $token;            // 🔹 Stocké côté serveur
-    setcookie('authToken', $token, time() + 60, '/', '', false, true); // 🔹 Cookie 1 minute
+    $token = bin2hex(random_bytes(16));         //  Jeton unique
+    $_SESSION['authToken'] = $token;            //  Stocké côté serveur
+    setcookie('authToken', $token, time() + 60, '/', '', false, true); //  Cookie 1 minute
     header('Location: page_admin.php');
     exit();
     } else {
