@@ -7,7 +7,7 @@ if (isset($_COOKIE['authToken']) && isset($_SESSION['authToken']) && $_COOKIE['a
     if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
         header('Location: page_admin.php');
         exit();
-    } elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'user') {
+    } elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'user') {   // New utilisateur
         header('Location: page_user.php');
         exit();
     }
