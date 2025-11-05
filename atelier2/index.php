@@ -1,11 +1,11 @@
 <?php
 // Démarrer une session utilisateur qui sera en mesure de pouvoir gérer les Cookies
 session_start();
-$random_number === bin2hex(random_bytes(16));
+
 // Vérifier si l'utilisateur est déjà en possession d'un cookie valide (cookie authToken ayant le contenu 12345)
 // Si l'utilisateur possède déjà ce cookie, il sera redirigé automatiquement vers la page home.php
 // Dans le cas contraire il devra s'identifier.
-if (isset($_COOKIE['authToken']) && $_COOKIE['authToken'] === random_number ) {
+if (isset($_COOKIE['authToken']) && $_COOKIE['authToken'] === '1234' ) {
     header('Location: page_admin.php');
     exit();
 }
