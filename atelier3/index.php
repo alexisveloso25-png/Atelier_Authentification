@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+if (isset($_SESSION['visites'])) {
+    $_SESSION['visites'] += 1;  // incrémente à chaque chargement
+} else {
+    $_SESSION['visites'] = 1;   // initialisation à 1 pour la première visite
+}
 
 // Si un cookie et une session valides existent déjà, rediriger vers la bonne page
 if (isset($_COOKIE['authToken']) && isset($_SESSION['authToken']) && $_COOKIE['authToken'] === $_SESSION['authToken']) {
@@ -49,9 +54,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Connexion</title>
 </head>
 <body>
-    <h1>Atelier 2 — Authentification par Cookie</h1>
+    <h1>Atelier 3 — Authentification par Cookie</h1>
     <h3>Connectez-vous en tant que <strong>admin</strong> (mot de passe <em>secret</em>) ou <strong>user</strong> (mot de passe <em>utilisateur</em>).</h3>
 
+    <!-- Compteur de visites -->
+    <p>Vous avez visité cette page d'accueil <?= $_SESSION['visites'] ?> fois.</p>
+    
     <form method="POST" action="">
         <label>Nom d'utilisateur :</label>
         <input type="text" name="username" required>
