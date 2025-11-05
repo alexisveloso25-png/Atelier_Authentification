@@ -1,39 +1,42 @@
 <?php
+// Démarre la session
 session_start();
 
+// Compteur de visites
+if (isset($_SESSION['visites'])) {
+    $_SESSION['visites'] += 1; // incrémente si déjà défini
+} else {
+    $_SESSION['visites'] = 1;  // initialise à 1 si première visite
+}
 
-// Si un cookie et une session valides existent déjà, rediriger vers la bonne page
-if (isset($_COOKIE['authToken']) && isset($_SESSION['authToken']) && $_COOKIE['authToken'] === $_SESSION['authToken']) {
-    // Redirige selon le rôle enregistré
-    if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {        // redirection admin 
-        header('Location: page_admin.php');
+// Vérifier si l'utilisateur est déjà connecté
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    if ($_SESSION['role'] === 'admin') {
+        header('Location: admin/page_admin.php'); // exemple si page déplacée
         exit();
-    } elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'user') {   // New utilisateur
-        header('Location: page_user.php');
+    } elseif ($_SESSION['role'] === 'user') {
+        header('Location: user/page_user.php'); // exemple si page déplacée
         exit();
     }
 }
 
-
+// Gérer le formulaire de connexion
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 
-   
-    if ($username === 'admin' && $password === 'secret') {     // Vérification des identifiants
-        $token = bin2hex(random_bytes(16));
-        $_SESSION['authToken'] = $token;
+    if ($username === 'admin' && $password === 'secret') {
+        $_SESSION['loggedin'] = true;
+        $_SESSION['username'] = $username;
         $_SESSION['role'] = 'admin';
-        setcookie('authToken', $token, time() + 60, '/', '', false, true);
-        header('Location: page_admin.php');
+        header('Location: admin/page_admin.php');
         exit();
 
-    } elseif ($username === 'user' && $password === 'utilisateur') {    // New identifiant
-        $token = bin2hex(random_bytes(16));
-        $_SESSION['authToken'] = $token;
+    } elseif ($username === 'user' && $password === 'utilisateur') {
+        $_SESSION['loggedin'] = true;
+        $_SESSION['username'] = $username;
         $_SESSION['role'] = 'user';
-        setcookie('authToken', $token, time() + 60, '/', '', false, true);
-        header('Location: page_user.php');
+        header('Location: user/page_user.php');
         exit();
 
     } else {
@@ -46,25 +49,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Connexion</title>
+    <title>Atelier 3 — Authentification par Session</title>
 </head>
 <body>
-    <h1>Atelier 2 — Authentification par Cookie</h1>
-    <h3>Connectez-vous en tant que <strong>admin</strong> (mot de passe <em>secret</em>) ou <strong>user</strong> (mot de passe <em>utilisateur</em>).</h3>
+    <h1>Atelier 3 — Authentification par Session</h1>
+
+    <!-- Affichage du nombre de visites -->
+    <p>Vous avez visité cette page d'accueil <?= $_SESSION['visites'] ?> fois.</p>
 
     <form method="POST" action="">
         <label>Nom d'utilisateur :</label>
-        <input type="text" name="username" required>
-        <br><br>
+        <input type="text" name="username" required><br><br>
+
         <label>Mot de passe :</label>
-        <input type="password" name="password" required>
-        <br><br>
+        <input type="password" name="password" required><br><br>
+
         <button type="submit">Se connecter</button>
     </form>
 
     <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
-
-    <br>
-    <a href="../index.html">Retour à l'accueil</a>
 </body>
 </html>
