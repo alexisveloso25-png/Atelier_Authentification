@@ -13,13 +13,13 @@ if (isset($_COOKIE['authToken']) && isset($_SESSION['authToken']) && $_COOKIE['a
     }
 }
 
-// Si le formulaire est soumis
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    // Vérification des identifiants
-    if ($username === 'admin' && $password === 'secret') {
+   
+    if ($username === 'admin' && $password === 'secret') {     // Vérification des identifiants
         $token = bin2hex(random_bytes(16));
         $_SESSION['authToken'] = $token;
         $_SESSION['role'] = 'admin';
