@@ -1,26 +1,23 @@
 <?php
-// Démarrer la session
 session_start();
 
-// Vérifier si l'utilisateur est bien en possession d'un cookie valide
-// Dans le cas contraire il sera redirigé vers la page d'accueil de connexion
-if (!isset($_COOKIE['authToken']) || $_COOKIE['authToken'] !== ($_SESSION['authToken'] ?? null)) {
-    // Si le cookie est invalide ou a expiré, on renvoie vers la page de connexion
+// Vérifie que l'utilisateur est bien authentifié et qu'il s'agit d'un admin
+if (!isset($_COOKIE['authToken']) 
+    || $_COOKIE['authToken'] !== ($_SESSION['authToken'] ?? null)
+    || ($_SESSION['role'] ?? '') !== 'admin') {
     header('Location: index.php');
     exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
+    <title>Espace Admin</title>
 </head>
 <body>
-    <h1>Bienvenue sur la page Administrateur protégée par un Cookie</h1>
-    <p>Vous êtes connecté en tant qu'admin.</p>
+    <h1>Bienvenue sur la page Administrateur 🔐</h1>
+    <p>Vous êtes connecté en tant qu’<strong>admin</strong>.</p>
     <a href="logout.php">Se déconnecter</a>
 </body>
 </html>
